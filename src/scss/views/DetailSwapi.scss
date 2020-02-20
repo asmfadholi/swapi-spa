@@ -1,0 +1,12 @@
+.detail-swapi {
+    .loading {
+        height: 24px;
+        background-color: rgba(0, 0, 0, 0.125);
+        &.name {
+            height: 28px;
+        }
+    }
+    svg {
+        margin-bottom: 0px;
+    }
+}
