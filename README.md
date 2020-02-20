@@ -1,4 +1,4 @@
-# pokemon-collection
+# Swapi-spa
 
 ## Project setup
 ```
