@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import SecureLS from 'secure-ls'
+import SwapiStore from './modules/SwapiStore'
 
 let ls = new SecureLS({ isCompression: true })
 
@@ -18,6 +19,6 @@ export default new Vuex.Store({
         })
     ],
     modules: {
-
+        SwapiStore
     }
 })

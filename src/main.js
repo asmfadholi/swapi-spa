@@ -23,27 +23,3 @@ new Vue({
     store,
     render: h => h(App)
 }).$mount('#app')
-
-const jane = {
-    name: 'john jane'
-}
-const john = {
-    name: 'john jonh'
-}
-
-let jos = function() {
-    this.mance = 'poyi'
-    this.kura = 'biruni'
-}
-
-let fires = () => {
-    // this.kopi = '123123'
-    console.log('sadasd')
-    console.log(this, 'asdasd')
-}
-
-fires()
-
-// console.log(new Object() instanceof Object)
-const arr = [2, 3, 4, 2]
-console.log(arr.indexOf(2))

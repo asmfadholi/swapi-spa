@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ExampleRoute from './modules/ExampleRoute'
+import SwapiRoute from './modules/SwapiRoute'
 
 Vue.use(Router)
 
 const modules = [
-    ...ExampleRoute
+    ...SwapiRoute
 ]
 
 export default new Router({
