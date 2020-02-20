@@ -5,16 +5,19 @@ import store from './stores'
 import './registerServiceWorker'
 
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+import vSelect from 'vue-select'
 
 // Styling
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'sweetalert2/dist/sweetalert2.min.css'
+import 'vue-select/dist/vue-select.css'
 import './scss/index.scss'
 
 // install plugin
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
+Vue.component('v-select', vSelect)
 
 Vue.config.productionTip = false
 

@@ -6,4 +6,16 @@
         height: 156px;
         background-color: rgba(0, 0, 0, 0.125);
     }
+    .select-search {
+        min-width: 250px;
+        .vs__dropdown-toggle {
+            height: 40px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+    }
+    .info-search {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
 }

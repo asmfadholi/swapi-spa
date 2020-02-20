@@ -40,6 +40,20 @@ export default {
             } catch (e) {
                 throw e
             }
+        },
+
+        async searchPeople({ commit }, req) {
+            try {
+                const res = await Api.searchPeople(req)
+                if (req.type === 'search') {
+                    res.state = 'list'
+                    commit('storeData', res)
+                    return
+                }
+                return res
+            } catch (e) {
+                throw e
+            }
         }
 
     }

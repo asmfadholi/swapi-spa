@@ -1,6 +1,24 @@
 <template>
   <div class="list-swapi">
-    <b-container fluid>
+    <b-container fluid class="mt-5">
+
+      <h4 class="text-center">
+        Search name here:
+      </h4>
+
+      <div class="d-flex justify-content-center mt-3">
+        <v-select
+          v-model="search_query"
+          @search="fetchOptions"
+          :options="options"
+          :create-option="name => ({ name })"
+          taggable
+          label="name"
+          class="select-search">
+          <div slot="no-options">Please type your keyword...</div>
+        </v-select>
+        <b-button variant="info" class="info-search" @click="searchPeople">Search</b-button>
+      </div>
 
       <div class="d-flex justify-content-center mt-3">
         <b-pagination
@@ -11,23 +29,32 @@
       </div>
 
       <div>
-        <b-row v-if="!loading">
-          <b-col v-for="(person, index) in itemData.list" :key="index" cols="12" sm="6" md="4" lg="3" class="p-3">
-            <div class="card">
-              <div class="p-2 d-flex justify-content-center">
-                <b-icon icon="person-fill" class="h1" variant="default"></b-icon>
-              </div>
+        <div v-if="!loading">
+          <b-row>
+            <b-col v-for="(person, index) in itemData.list" :key="index" cols="12" sm="6" md="4" lg="3" class="p-3">
+              <div class="card">
+                <div class="p-2 d-flex justify-content-center">
+                  <b-icon icon="person-fill" class="h1" variant="default"></b-icon>
+                </div>
 
-              <div class="p-2 d-flex justify-content-center">
-                <h4>{{person.name}}</h4>
-              </div>
+                <div class="p-2 d-flex justify-content-center">
+                  <h4>{{person.name}}</h4>
+                </div>
 
-              <b-button variant="info" @click="redirectToDetail(person.url)">
-                Detail
-              </b-button>
+                <b-button variant="info" @click="redirectToDetail(person.url)">
+                  Detail
+                </b-button>
+              </div>
+            </b-col>
+          </b-row>
+          <div v-if="itemData.list.length < 1">
+
+            <div class="text-center">
+               Data is not found
             </div>
-          </b-col>
-        </b-row>
+
+          </div>
+        </div>
 
         <b-row v-else>
           <b-col cols="12" sm="6" md="4" lg="3" v-for="(val, index) in 10" :key="index" class="p-3">
@@ -52,11 +79,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import _ from 'lodash'
 
 export default {
   name: 'ListSwapi',
   data () {
     return {
+      search_query: '',
+      options: [],
       loading: false,
       currentPage: 1,
       itemData: {
@@ -93,11 +123,27 @@ export default {
       this.$store.dispatch('SwapiStore/listPeople', { page })
     },
 
+    searchPeople () {
+      this.loading = true
+      this.$store.dispatch('SwapiStore/searchPeople', { query: this.search_query ? this.search_query.name : '', type: 'search' })
+    },
+
     redirectToDetail (url) {
       const splitUrl = url.split('/')
       const getId = splitUrl[splitUrl.length - 2]
       this.$router.replace('/home/list/detail/' + getId)
-    }
+    },
+
+    fetchOptions: _.debounce(async function (search, loading) {
+      try {
+        loading(true)
+        const res = await this.$store.dispatch('SwapiStore/searchPeople', { query: search, type: 'fetch' })
+        loading(false)
+        this.options = res.data.results
+      } catch (err) {
+        throw err
+      }
+    }, 200)
   }
 
 }
