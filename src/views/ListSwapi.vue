@@ -119,9 +119,9 @@ export default {
   },
 
   methods: {
-    listPeople (page) {
+    listPeople: _.debounce(function (page) {
       this.$store.dispatch('SwapiStore/listPeople', { page })
-    },
+    }, 200),
 
     searchPeople () {
       this.loading = true
@@ -138,8 +138,8 @@ export default {
       try {
         loading(true)
         const res = await this.$store.dispatch('SwapiStore/searchPeople', { query: search, type: 'fetch' })
-        loading(false)
         this.options = res.data.results
+        loading(false)
       } catch (err) {
         throw err
       }
