@@ -1,5 +1,6 @@
 import Main from '@/views/Main'
 import ListSwapi from '@/views/ListSwapi'
+import DetailSwapi from '@/views/DetailSwapi'
 
 export default [
 
@@ -13,7 +14,16 @@ export default [
             {
                 path: '/home/list',
                 name: 'ListSwapi',
-                component: ListSwapi
+                component: ListSwapi,
+                children: [
+
+                    {
+                        path: '/home/list/detail/:id',
+                        name: 'DetailSwapi',
+                        component: DetailSwapi
+                    }
+
+                ]
             }
 
         ]

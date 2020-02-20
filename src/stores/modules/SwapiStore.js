@@ -30,6 +30,16 @@ export default {
             } catch (e) {
                 throw e
             }
+        },
+
+        async detailPeople({ commit }, req) {
+            try {
+                const res = await Api.detailPeople(req)
+                res.state = 'detail'
+                commit('storeData', res)
+            } catch (e) {
+                throw e
+            }
         }
 
     }

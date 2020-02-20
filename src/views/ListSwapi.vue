@@ -17,7 +17,7 @@
               <h4>{{person.name}}</h4>
             </div>
 
-            <b-button variant="info">
+            <b-button variant="info" @click="redirectToDetail(person.url)">
               Detail
             </b-button>
           </div>
@@ -33,6 +33,7 @@
       </div>
 
     </b-container>
+    <router-view/>
   </div>
 </template>
 
@@ -73,6 +74,12 @@ export default {
   methods: {
     listPeople (page) {
       this.$store.dispatch('SwapiStore/listPeople', { page })
+    },
+
+    redirectToDetail (url) {
+      const splitUrl = url.split('/')
+      const getId = splitUrl[splitUrl.length - 2]
+      this.$router.replace('/home/list/detail/' + getId)
     }
   }
 
