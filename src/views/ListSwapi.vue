@@ -120,12 +120,12 @@ export default {
 
   methods: {
     listPeople: _.debounce(function (page) {
-      this.$store.dispatch('SwapiStore/listPeople', { page })
+      this.$store.dispatch('SwapiStore/searchPeople', { query: this.search_query ? this.search_query.name : '', type: 'search', page })
     }, 200),
 
     searchPeople () {
       this.loading = true
-      this.$store.dispatch('SwapiStore/searchPeople', { query: this.search_query ? this.search_query.name : '', type: 'search' })
+      this.$store.dispatch('SwapiStore/searchPeople', { query: this.search_query ? this.search_query.name : '', type: 'search', page: 1 })
     },
 
     redirectToDetail (url) {
@@ -137,7 +137,7 @@ export default {
     fetchOptions: _.debounce(async function (search, loading) {
       try {
         loading(true)
-        const res = await this.$store.dispatch('SwapiStore/searchPeople', { query: search, type: 'fetch' })
+        const res = await this.$store.dispatch('SwapiStore/searchPeople', { query: search, type: 'fetch', page: 1 })
         this.options = res.data.results
         loading(false)
       } catch (err) {

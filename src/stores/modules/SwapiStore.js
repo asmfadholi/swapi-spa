@@ -22,15 +22,15 @@ export default {
     },
 
     actions: {
-        async listPeople({ commit }, req) {
-            try {
-                const res = await Api.listPeople(req)
-                res.state = 'list'
-                commit('storeData', res)
-            } catch (e) {
-                throw e
-            }
-        },
+        // async listPeople({ commit }, req) {
+        //     try {
+        //         const res = await Api.listPeople(req)
+        //         res.state = 'list'
+        //         commit('storeData', res)
+        //     } catch (e) {
+        //         throw e
+        //     }
+        // },
 
         async detailPeople({ commit }, req) {
             try {
